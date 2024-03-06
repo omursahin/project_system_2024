@@ -4,7 +4,7 @@
 # Proje Yönetim Sistemi
 ___
 ## Başlangıç
-Proje Yönetim Sistemi, Python 3.9 ile yazılmış bir web uygulamasıdır. Proje Yönetim Sistemi, Django 4.1.7 ve Django Rest Framework 3.14.0 sürümlerini kullanmaktadır.
+Proje Yönetim Sistemi, Python 3.10 ile yazılmış bir web uygulamasıdır. Proje Yönetim Sistemi, Django 5.0.3 ve Django Rest Framework 3.14.0 sürümlerini kullanmaktadır.
 
 Migration işlemleri için ilk olarak:
 
@@ -38,7 +38,7 @@ ___
 **Adlandırma Kuralları:**
 
 * Modül isimleri tamamen küçük harf olmalıdır.
-* Sınıf isimleri CamelCase şeklinde olmalıdır.
+* Sınıf isimleri PascalCase şeklinde olmalıdır.
 * Fonksiyon ve değişken isimleri alt çizgi ile ayrılmış küçük harflerden oluşmalıdır.
 
 **Dize Tırnakları:**

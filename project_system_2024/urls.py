@@ -18,12 +18,14 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from django.urls import path, include
 from rest_framework import serializers, viewsets, routers
+from rest_framework_simplejwt.views import (TokenObtainPairView,
+                                            TokenRefreshView)
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['url', 'username', 'email']
 
 
 # ViewSets define the view behavior.
@@ -40,4 +42,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include(router.urls)),
     path('api/v1/api-auth/', include('rest_framework.urls')),
+    path('api/v1/token/', TokenObtainPairView.as_view(),
+         name='token_obtain_pair'),
+    path('api/v1/token/refresh/', TokenRefreshView.as_view(),
+         name='token_refresh'),
 ]

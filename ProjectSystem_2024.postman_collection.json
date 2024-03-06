@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "f9558804-a84e-4999-985d-3833f20df073",
+		"name": "ProjectSystem_2024",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28240605",
+		"_collection_link": "https://visseria.postman.co/workspace/My-Workspace~ae097f71-5ad2-447f-8a8d-78d5e2ac68cc/collection/28240605-f9558804-a84e-4999-985d-3833f20df073?action=share&source=collection_link&creator=28240605"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"omur\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/v1/token/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"token",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/api/v1/users/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const echoPostRequest = {",
+					"  url: pm.collectionVariables.get(\"url\")+'/api/v1/token/',",
+					"  method: 'POST',",
+					"     header: {",
+					"        'content-type': 'application/json',",
+					"    },",
+					"    body: {",
+					"        mode: 'raw',",
+					"        raw: JSON.stringify({ username: pm.collectionVariables.get(\"username\"), password: pm.collectionVariables.get(\"password\") })",
+					"    }",
+					"};",
+					"pm.sendRequest(echoPostRequest, function (err, res) {",
+					"    const json = res.json() // Get JSON value from the response body ",
+					"    console.log(json)",
+					"    pm.collectionVariables.set(\"token\", json.access) // makes sure to update this key name.",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "username",
+			"value": "omur",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "123456",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}
