@@ -111,6 +111,6 @@ ___
 
 **Kullanıcı Hesapları**
 
-* omur@test.com:123456
+* admin@test.com:123456
 * ogrenci1@erciyes.edu.tr:Password@2023
 * ogrenci2@erciyes.edu.tr:Password@2023
