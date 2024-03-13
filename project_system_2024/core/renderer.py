@@ -17,7 +17,7 @@ class JSONResponseRenderer(JSONRenderer):
 
     def render(self, data, accepted_media_type=None, renderer_context=None):
         if renderer_context['response'].status_code < 400:
-            if 'data' in data:
+            if data and ('data' in data):  # 'data' in data
                 response_dict = self.generate_dict_response(
                     data['data'], data['payload']['pagination']
                     if 'payload' in data else None,

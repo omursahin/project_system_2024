@@ -51,7 +51,8 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     identification_number = models.CharField(unique=True, max_length=20,
                                              blank=False, null=False)
     email = models.EmailField(unique=True, blank=False, null=False)
-    phone_number = models.CharField(max_length=10, null=True, blank=True)
+    phone_number = models.CharField(max_length=10,
+                                    null=False, blank=True, default='')
     last_login = models.DateTimeField(null=True)
     time_zone = models.CharField(max_length=8, blank=True)
     is_staff = models.BooleanField(default=False)

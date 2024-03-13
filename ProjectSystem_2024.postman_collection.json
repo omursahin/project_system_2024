@@ -8,6 +8,167 @@
 	},
 	"item": [
 		{
+			"name": "semesters",
+			"item": [
+				{
+					"name": "semesters",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/v1/semesters/?search=2014",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"semesters",
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "2014"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "semester detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/v1/semesters/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"semesters",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "semester update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"year\": 2032\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/semesters/1/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"semesters",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "semester delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/semesters/2/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"semesters",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create semesters",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/v1/semesters/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"semesters",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Login",
 			"request": {
 				"method": "POST",
@@ -22,13 +183,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/api/v1/token/",
+					"raw": "{{url}}/api/v1/account/token/",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
 						"v1",
+						"account",
 						"token",
 						""
 					]
@@ -70,20 +232,20 @@
 				"type": "text/javascript",
 				"exec": [
 					"const echoPostRequest = {",
-					"  url: pm.collectionVariables.get(\"url\")+'/api/v1/token/',",
+					"  url: pm.collectionVariables.get(\"url\")+'/api/v1/account/token/',",
 					"  method: 'POST',",
 					"     header: {",
 					"        'content-type': 'application/json',",
 					"    },",
 					"    body: {",
 					"        mode: 'raw',",
-					"        raw: JSON.stringify({ username: pm.collectionVariables.get(\"username\"), password: pm.collectionVariables.get(\"password\") })",
+					"        raw: JSON.stringify({ email: pm.collectionVariables.get(\"email\"), password: pm.collectionVariables.get(\"password\") })",
 					"    }",
 					"};",
 					"pm.sendRequest(echoPostRequest, function (err, res) {",
 					"    const json = res.json() // Get JSON value from the response body ",
 					"    console.log(json)",
-					"    pm.collectionVariables.set(\"token\", json.access) // makes sure to update this key name.",
+					"    pm.collectionVariables.set(\"token\", json.data.access) // makes sure to update this key name.",
 					"});"
 				]
 			}
@@ -105,8 +267,8 @@
 			"type": "string"
 		},
 		{
-			"key": "username",
-			"value": "omur",
+			"key": "email",
+			"value": "admin@test.com",
 			"type": "string"
 		},
 		{

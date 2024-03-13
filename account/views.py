@@ -18,7 +18,8 @@ class UserCreateList(generics.ListCreateAPIView):
     filter_backends = [DjangoFilterBackend, filters.SearchFilter,
                        MyOrderingFilter]
     filterset_fields = ('email', 'identification_number')
-    search_fields = ('email', 'first_name', 'last_name', 'identification_number')
+    search_fields = ('email', 'first_name', 'last_name',
+                     'identification_number')
     renderer_classes = [JSONResponseRenderer]
     ordering_fields = '__all__'
 

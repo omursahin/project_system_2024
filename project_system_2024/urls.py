@@ -15,16 +15,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.contrib.auth import get_user_model
 from django.urls import path, include, re_path
-from rest_framework import routers, serializers, viewsets
 
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from rest_framework.decorators import action
-from rest_framework.generics import get_object_or_404
-from rest_framework.response import Response
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -61,5 +56,6 @@ urlpatterns = [
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0),
             name='schema-redoc'),
     re_path(r'^api/v1/users/', include('account.urls')),
+    re_path(r'^api/v1/semesters/', include('semester.urls')),
 
 ]
