@@ -17,6 +17,7 @@ Daha sonra:
 Proje Yönetim Sistemi'ni çalıştırmak için:
 
 `python manage.py runserver` yazarak çalıştırabilirsiniz.
+>#No module named pkg_resources hatası `pip install --upgrade setuptools` ile çözülebilir.
 
 
 ___
