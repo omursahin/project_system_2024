@@ -1,4 +1,4 @@
-[![Django CI](https://github.com/omursahin/project_system/actions/workflows/django.yml/badge.svg)](https://github.com/omursahin/project_system/actions/workflows/django.yml)
+[![Django CI](https://github.com/omursahin/project_system_2024/actions/workflows/django.yml/badge.svg)](https://github.com/omursahin/project_system_2024/actions/workflows/django.yml)
 
 
 # Proje Yönetim Sistemi
