@@ -57,5 +57,6 @@ urlpatterns = [
             name='schema-redoc'),
     re_path(r'^api/v1/users/', include('account.urls')),
     re_path(r'^api/v1/semesters/', include('semester.urls')),
+    re_path(r'^api/v1/courses/', include('course.urls')),
 
 ]
