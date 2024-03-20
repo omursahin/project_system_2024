@@ -1,8 +1,8 @@
 from django.urls import path
 
-from semester.views import SemesterCreateList, SemesterDetail
+from course.views import CourseDetail, CourseCreateList
 
 urlpatterns = [
-    path('', SemesterCreateList.as_view()),
-    path('<int:pk>/', SemesterDetail.as_view()),
+    path('', CourseCreateList.as_view()),
+    path('<int:pk>/', CourseDetail.as_view()),
 ]

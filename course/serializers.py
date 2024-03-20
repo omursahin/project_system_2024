@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from semester.models import Semester
+from course.models import Course
 
 
-class SemesterSerializer(serializers.ModelSerializer):
+class CourseSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Semester
+        model = Course
         fields = '__all__'
