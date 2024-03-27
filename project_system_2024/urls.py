@@ -25,7 +25,6 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-
 schema_view = get_schema_view(
     openapi.Info(
         title="Project System API",
@@ -38,7 +37,6 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=[permissions.AllowAny],
 )
-
 
 # ViewSets define the view behavior.
 
@@ -58,5 +56,6 @@ urlpatterns = [
     re_path(r'^api/v1/users/', include('account.urls')),
     re_path(r'^api/v1/semesters/', include('semester.urls')),
     re_path(r'^api/v1/courses/', include('course.urls')),
+    re_path(r'^api/v1/semester_courses/', include('semester_course.urls')),
 
 ]
