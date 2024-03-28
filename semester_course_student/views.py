@@ -14,10 +14,10 @@ class SemesterCourseStudentCreateList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAdminUser]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter,
                        MyOrderingFilter]
-    filterset_fields = ('semester_course__semester__term', 'semester_course__course__year',
+    filterset_fields = ('semester_course__semester__term',
                         'student__first_name', 'student__email')
-    search_fields = ('semester_course__semester__term', 'semester_course__course__year',
-                     'student__first_name', 'student__email')
+    search_fields = ('semester_course__semester__term',
+                        'student__first_name', 'student__email')
     renderer_classes = [JSONResponseRenderer]
     ordering_fields = '__all__'
 

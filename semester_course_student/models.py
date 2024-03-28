@@ -11,7 +11,7 @@ class SemesterCourseStudent(BaseModel):
     student = models.ForeignKey('account.MyUser', on_delete=models.CASCADE,
                                 related_name="semester_course_students")
 
-    mid_term = models.IntegerField(null=True, blank=True)
+    mid_term = models.IntegerField(blank=0)
     final = models.IntegerField(null=True, blank=True)
     make_up = models.IntegerField(null=True, blank=True)
 
