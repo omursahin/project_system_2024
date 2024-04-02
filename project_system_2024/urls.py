@@ -57,7 +57,8 @@ urlpatterns = [
     re_path(r'^api/v1/semesters/', include('semester.urls')),
     re_path(r'^api/v1/courses/', include('course.urls')),
     re_path(r'^api/v1/semester_courses/', include('semester_course.urls')),
+    re_path(r'^api/v1/semester_course_students/',
+            include('semester_course_student.urls')),
     re_path(r'^api/v1/groups/', include('group.urls')),
     re_path(r'^api/v1/reports/', include('report.urls')),
-
 ]
