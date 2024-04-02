@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "course",
     "semester_course",
     "group",
+    "report",
 ]
 
 MIDDLEWARE = [
