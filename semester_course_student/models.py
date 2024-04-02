@@ -5,8 +5,10 @@ from project_system_2024.core.base_model import BaseModel
 
 # Create your models here.
 class SemesterCourseStudent(BaseModel):
-    semester_course = models.ForeignKey('semester_course.SemesterCourse', on_delete=models.CASCADE,
-                                        related_name="semester_course_students")
+    semester_course = (models.
+                       ForeignKey('semester_course.SemesterCourse',
+                                  on_delete=models.CASCADE,
+                                  related_name="semester_course_students"))
 
     student = models.ForeignKey('account.MyUser', on_delete=models.CASCADE,
                                 related_name="semester_course_students")

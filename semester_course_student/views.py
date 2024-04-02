@@ -17,7 +17,7 @@ class SemesterCourseStudentCreateList(generics.ListCreateAPIView):
     filterset_fields = ('semester_course__semester__term',
                         'student__first_name', 'student__email')
     search_fields = ('semester_course__semester__term',
-                        'student__first_name', 'student__email')
+                     'student__first_name', 'student__email')
     renderer_classes = [JSONResponseRenderer]
     ordering_fields = '__all__'
 
