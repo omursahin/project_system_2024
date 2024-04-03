@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "semester_course_student",
     "group",
     "report",
+    "academician_group_grade",
 ]
 
 MIDDLEWARE = [
