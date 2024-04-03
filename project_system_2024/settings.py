@@ -48,9 +48,8 @@ INSTALLED_APPS = [
     "report",
     "academician_group_grade",
     "group_project",
-    "project_report"
+    "project_report",
     "group_member",
-    "group_project"
 ]
 
 MIDDLEWARE = [
