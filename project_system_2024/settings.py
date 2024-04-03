@@ -128,8 +128,12 @@ SWAGGER_SETTINGS = {
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "defaultdb",
+        "USER": "avnadmin",
+        "PASSWORD": "AVNS_EGWJs3t2m3EdRrWErYv",
+        "HOST": "pg-27f7c8b5-project-system.a.aivencloud.com",
+        "PORT": "11786"
     }
 }
 
