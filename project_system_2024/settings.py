@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "semester_course_student",
     "group",
     "report",
+    "academician_group_grade",
     "group_project",
     "project_report"
     "group_member",

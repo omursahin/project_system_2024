@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "727027d7-dda9-483b-98aa-7e004acc9cf4",
+		"_postman_id": "6d793251-f259-4ab4-97e7-48d7e11b8751",
 		"name": "ProjectSystem_2024",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "34037989"
+		"_exporter_id": "33267438"
 	},
 	"item": [
 		{
@@ -812,10 +812,10 @@
 			]
 		},
 		{
-			"name": "groupmember",
+			"name": "academiciangroupgrade",
 			"item": [
 				{
-					"name": "groupmember",
+					"name": "academiciangroupgrade",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -826,19 +826,19 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/api/v1/semester_course_students/?search=2014",
+							"raw": "{{url}}/api/v1/academician_group_grade/?search=4",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"semester_course_students",
-								""
+								"academician_group_grade",
 							],
 							"query": [
 								{
 									"key": "search",
+									"value": "4"
 									"value": "2014"
 								}
 							]
@@ -847,7 +847,7 @@
 					"response": []
 				},
 				{
-					"name": "groupmemberdetail",
+					"name": "academiciangroupgrades detail",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -858,22 +858,21 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/api/v1/semester_course_students/",
+							"raw": "{{url}}/api/v1/academician_group_grade/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"semester_course_students",
-								""
+								"academician_group_grade",
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "groupmember update",
+					"name": "academiciangroupgrades update",
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -885,7 +884,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"year\": 2032\r\n}",
+							"raw": "{           \r\n            \"mid_term\": 40,\r\n            \"final\": 50,\r\n            \"make_up\": 76,\r\n            \"academician\": 1,\r\n            \"group\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -893,14 +892,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/v1/semester_course_students/1/",
+							"raw": "{{url}}/api/v1/academician_group_grade/1/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"semester_course_students",
+								"academician_group_grade",
 								"1",
 								""
 							]
@@ -909,7 +908,7 @@
 					"response": []
 				},
 				{
-					"name": "groupmember delete",
+					"name": "academiciangroupgrades delete",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -929,15 +928,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/v1/semester_course_students/2/",
+							"raw": "{{url}}/api/v1/academician_group_grade/1/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"semester_course_students",
-								"2",
+								"academician_group_grade",
+								"1",
 								""
 							]
 						}
@@ -945,7 +944,7 @@
 					"response": []
 				},
 				{
-					"name": "create groupmember",
+					"name": "academiciangroupgrades course",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -955,15 +954,24 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{           \r\n            \"mid_term\": 40,\r\n            \"final\": 50,\r\n            \"make_up\": 76,\r\n            \"academician\": 1,\r\n            \"group\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{url}}/api/v1/semesters/",
+							"raw": "{{url}}/api/v1/academician_group_grade/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"semesters",
+								"academician_group_grade",
 								""
 							]
 						}
