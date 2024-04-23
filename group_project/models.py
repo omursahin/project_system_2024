@@ -5,10 +5,10 @@ from project_system_2024.core.base_model import BaseModel
 
 # Create your models here.
 class GroupProject(BaseModel):
-    group_project = (models.
-                     ForeignKey('group.Group',
-                                on_delete=models.CASCADE,
-                                related_name="group_project"))
+    group = (models.
+             ForeignKey('group.Group',
+                        on_delete=models.CASCADE,
+                        related_name="group_project"))
 
     title = models.CharField(max_length=255, blank=False, null=False)
     description = models.CharField(max_length=255, blank=True, null=True)
@@ -22,7 +22,7 @@ class GroupProject(BaseModel):
                               choices=STATUS_CHOICES)
 
     def __str__(self):
-        return f"{self.group_project}"
+        return f"{self.group}"
 
     class Meta:
         db_table = 'group_project'
