@@ -834,12 +834,12 @@
 								"api",
 								"v1",
 								"academician_group_grade",
-								""
 							],
 							"query": [
 								{
 									"key": "search",
 									"value": "4"
+									"value": "2014"
 								}
 							]
 						}
@@ -866,7 +866,6 @@
 								"api",
 								"v1",
 								"academician_group_grade",
-								""
 							]
 						}
 					},
