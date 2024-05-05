@@ -130,31 +130,28 @@ SWAGGER_SETTINGS = {
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "defaultdb",
-#         "USER": "avnadmin",
-#         "PASSWORD": "AVNS_EGWJs3t2m3EdRrWErYv",
-#         "HOST": "pg-27f7c8b5-project-system.a.aivencloud.com",
-#         "PORT": "11786",
-#         "test": {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             "NAME": BASE_DIR / "test.sqlite3",
-#         }
-#     }
-#
-# }
 
 DATABASES = {
     "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "defaultdb",
+        "USER": "avnadmin",
+        "PASSWORD": "AVNS_EGWJs3t2m3EdRrWErYv",
+        "HOST": "pg-27f7c8b5-project-system.a.aivencloud.com",
+        "PORT": "11786",
+    }
+
+}
+import sys
+if 'test' in sys.argv:
+    DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
-        "NAME": BASE_DIR / "db.sqlite3",
+        'NAME': BASE_DIR / "db.sqlite3",
         "test": {
             "NAME": BASE_DIR / "test.sqlite3",
         }
     }
-}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
