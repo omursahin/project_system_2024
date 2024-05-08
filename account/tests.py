@@ -34,10 +34,13 @@ class UserTest(APITestCase):
                                         identification_number=self.admin_user["identification_number"])
         MyUser.objects.create_user(email=self.student_user["email"],
                                    password=self.student_user["password"],
-                                   identification_number=self.student_user["identification_number"])
+                                   identification_number=self.student_user
+                                   ["identification_number"])
 
     def test_create_user_database(self):
-        user = MyUser.objects.create_user(email="test_user@test.com", password="test1234", identification_number="1234567892")
+        user = MyUser.objects.create_user(email="test_user@test.com",
+                                          password="test1234",
+                                          identification_number="1234567892")
         self.assertEqual(user.email, "test_user@test.com")
 
     def test_not_create_user_rest(self):
