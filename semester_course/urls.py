@@ -6,5 +6,5 @@ from semester_course.views import (SemesterCourseCreateList,
 
 urlpatterns = [
     path('', SemesterCourseCreateList.as_view()),
-    path('<int:pk>/', SemesterCourseDetail.as_view()),
+    path('<int:pk>/', SemesterCourseDetail.as_view(),name='your-model-detail'),
 ]
