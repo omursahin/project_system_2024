@@ -5,7 +5,7 @@ from project_system_2024.core.filter import MyOrderingFilter
 
 from project_system_2024.core.renderer import JSONResponseRenderer
 from semester_course.models import SemesterCourse
-from semester_course.permission import IsAdminOrDeny, IsAdminOrReadOnly
+from semester_course.permission import  IsAdminOrReadOnly
 from semester_course.serializers import SemesterCourseSerializer
 
 
@@ -29,4 +29,4 @@ class SemesterCourseCreateList(generics.ListCreateAPIView):
 class SemesterCourseDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SemesterCourseSerializer
     queryset = SemesterCourse.active.all()
-    permission_classes = [IsAdminOrDeny]
+    permission_classes = [IsAdminOrReadOnly]

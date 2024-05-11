@@ -179,7 +179,6 @@ class SemesterCourseTest(APITestCase):
         }
         url = self.SEMESTER_COURSE_URL + f"{response.data['id']}/"
         response1 = self.client.put(url, update_data, format="json")
-        print(response1.data)
         self.assertEqual(response1.status_code, status.HTTP_200_OK)
 
     def test_semester_course_update_put_unauthenticated(self):
