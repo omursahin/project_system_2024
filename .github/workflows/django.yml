@@ -32,3 +32,10 @@ jobs:
     - name: Run Flake8
       run: |
         flake8 --max-line-length 120  --exclude migrations,pycache,manage.py,settings.py,env,venv .
+    - name: Run tests and collect coverage
+      run: coverage run --source='.' manage.py test
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v4.0.1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+
