@@ -1,5 +1,5 @@
-[![Django CI](https://github.com/omursahin/project_system_2024/actions/workflows/django.yml/badge.svg)](https://github.com/omursahin/project_system_2024/actions/workflows/django.yml)
-
+[![Django CI](https://github.com/omursahin/project_system_2024/actions/workflows/django.yml/badge.svg?branch=main)](https://github.com/omursahin/project_system_2024/actions/workflows/django.yml)
+[![codecov](https://codecov.io/gh/omursahin/project_system_2024/graph/badge.svg?token=2BMANPUI6I)](https://codecov.io/gh/omursahin/project_system_2024)
 
 # Proje Yönetim Sistemi
 ___
