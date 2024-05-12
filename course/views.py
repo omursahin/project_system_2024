@@ -1,5 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, filters
+from rest_framework.permissions import IsAdminUser
 
 from project_system_2024.core.filter import MyOrderingFilter
 from project_system_2024.core.renderer import JSONResponseRenderer
@@ -20,5 +21,6 @@ class CourseCreateList(generics.ListCreateAPIView):
 
 
 class CourseDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAdminUser]
     serializer_class = CourseSerializer
     queryset = Course.active.all()
