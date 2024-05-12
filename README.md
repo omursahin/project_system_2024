@@ -100,7 +100,7 @@ Yazım standartlarını kontrol etmek için Flake8 kullanılmaktadır.
 Flake8 kuralları için [buraya](http://flake8.pycqa.org/en/latest/user/error-codes.html) bakabilirsiniz.
 
 Örnek flake 8 komutu:
-`flake8 --exclude migrations,pycache,manage.py,settings.py,env,venv .`
+`flake8 --max-line-length 120  --exclude migrations,pycache,manage.py,settings.py,env,venv .`
 
 Testleri çalıştırmak ve kapsama miktarını hesaplamak için:
 `coverage run --source='.' manage.py test`

@@ -31,4 +31,4 @@ jobs:
         python manage.py test
     - name: Run Flake8
       run: |
-        flake8 --exclude migrations,pycache,manage.py,settings.py,env,venv .
+        flake8 --max-line-length 120  --exclude migrations,pycache,manage.py,settings.py,env,venv .

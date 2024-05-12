@@ -9,7 +9,8 @@ from django.utils.translation import gettext_lazy as _
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, identification_number, email, password=None, is_admin=False, is_staff=False,
+    def create_user(self, identification_number, email,
+                    password=None, is_admin=False, is_staff=False,
                     is_active=True):
 
         if not identification_number:
@@ -29,7 +30,8 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, identification_number, password=None, **extra_fields):
+    def create_superuser(self, email,
+                         identification_number, password=None, **extra_fields):
         if not email:
             raise ValueError("User must have an email")
         if not password:

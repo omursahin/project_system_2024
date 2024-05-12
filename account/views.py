@@ -33,8 +33,6 @@ class UserCreateList(generics.ListCreateAPIView):
     #     return self.create(request, *args, **kwargs)
 
 
-
-
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAdminUser | IsOwner]
     serializer_class = UserSerializer
