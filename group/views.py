@@ -11,7 +11,7 @@ from group.serializers import GroupSerializer
 class GroupCreateList(generics.ListCreateAPIView):
     serializer_class = GroupSerializer
     queryset = Group.active.all()
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter,
                        MyOrderingFilter]
     filterset_fields = ('owner__first_name', 'owner__last_name',

@@ -15,12 +15,7 @@ class GroupTest(APITestCase):
     GROUP_URL = "/api/v1/groups/"
     PASSWORD = "test1234"
 
-    group_temp = {
-        "title": "Test Group",
-        "description": "test description",
-        "max_size": 10,
-        "invitation_code": "invitation_code"
-    }
+
 
     def setUp(self):
         self.student = MyUser.objects.create_user(email="test_user@test.com", password=self.PASSWORD,
@@ -38,14 +33,16 @@ class GroupTest(APITestCase):
                                                              max_grup_size=88)
 
     def test_group_creation_with_create(self):
-
+        group_temp = {
+            "title": "Test Group",
+            "description": "test description",
+            "max_size": 10,
+        }
         group1 = Group.objects.create(
             owner=self.student,
             semester_course=self.semester_course,
             title=self.group_temp["title"],
-            description=self.group_temp["description"],
-            max_size=self.group_temp["max_size"],
-            invitation_code=self.group_temp["invitation_code"])
+            description=self.group_temp["description"])
 
         group2 = Group.objects.create(owner=self.student,
                                       semester_course=self.semester_course2,
@@ -58,8 +55,14 @@ class GroupTest(APITestCase):
         self.assertLess(groups.count(), 2)
 
     def test_group_creation_with_post(self):
+        group_temp = {
+            "title": "Test Group",
+            "description": "test description",
+            "max_size": 10,
+            "semester_course": self.semester_course.id
+        }
         is_loggedin = self.client.login(email=self.student.email, password=self.PASSWORD)
         self.assertTrue(is_loggedin)
 
-        response = self.client.post(self.GROUP_URL, self.group_temp)
+        response = self.client.post(self.GROUP_URL, group_temp)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED, response)

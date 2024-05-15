@@ -8,6 +8,8 @@ from semester_course.models import SemesterCourse
 
 class GroupSerializer(serializers.ModelSerializer):
     owner = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    max_size = serializers.ReadOnlyField()
+    invitation_code = serializers.ReadOnlyField()
 
     class Meta:
         model = Group
