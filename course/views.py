@@ -2,6 +2,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, filters
 from rest_framework.permissions import IsAdminUser
 
+from course.permissions import IsSuperUser
 from project_system_2024.core.filter import MyOrderingFilter
 from project_system_2024.core.renderer import JSONResponseRenderer
 from course.models import Course
@@ -11,6 +12,7 @@ from course.serializers import CourseSerializer
 # Create your views here.
 class CourseCreateList(generics.ListCreateAPIView):
     serializer_class = CourseSerializer
+    permission_classes = [IsSuperUser]
     queryset = Course.active.all()
     filter_backends = [DjangoFilterBackend, filters.SearchFilter,
                        MyOrderingFilter]
@@ -21,6 +23,6 @@ class CourseCreateList(generics.ListCreateAPIView):
 
 
 class CourseDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsSuperUser]
     serializer_class = CourseSerializer
     queryset = Course.active.all()

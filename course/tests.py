@@ -58,7 +58,7 @@ class CourseTest(APITestCase):
     def test_create_course_endpoint_without_login(self):
         self.client.logout()
         response = self.client.get(self.COURSE_URL)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_is_course_unique(self):
         is_logged_in = self.client.login(email=self.admin_user["email"], password=self.admin_user["password"])
