@@ -153,7 +153,8 @@ class SemesterCourseStudentTest(APITestCase):
         url = "{}{}/".format(self.URL, response.data['id'])
         response_for_delete = self.client.delete(url)
         self.assertEqual(response_for_delete.status_code, status.HTTP_204_NO_CONTENT)
-
+        response_after_delete = self.client.get(url)
+        self.assertEqual(response_after_delete.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_semester_course_student_delete_student(self):
         semester_course_student_payload = {
