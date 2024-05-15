@@ -1,5 +1,6 @@
 # Create your tests here.
-# TODO Şifre kontrolü gerçekleşmiyor
+
+# from django.db import IntegrityError
 from rest_framework import status
 from rest_framework.test import APITestCase
 
@@ -48,19 +49,129 @@ class CourseTest(APITestCase):
         self.assertEqual(test_course.title, "test_title")
         self.assertEqual(test_course.description, "test_description")
 
-    def test_create_course_endpoint_with_login(self):
+    """
+    def test_create_course_is_unique(self):
+        test_course_1 = Course.objects.create(code="test", title="test_title", description="test_description")
+        self.assertEqual(test_course_1.code, "test")
+        self.assertEqual(test_course_1.title, "test_title")
+        self.assertEqual(test_course_1.description, "test_description")
+        self.assertRaises(Course.objects.create(code="test",
+                                                title="test_title",
+                                                description="test_description"), IntegrityError)
+    """
+
+    def test_create_course_endpoint_with_admin_login_get(self):
         is_logged_in = self.client.login(email=self.admin_user["email"], password=self.admin_user["password"])
         self.assertTrue(is_logged_in)
 
         response = self.client.get(self.COURSE_URL)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_create_course_endpoint_with_student_user_login_get(self):
+        is_logged_in = self.client.login(email=self.student_user["email"], password=self.student_user["password"])
+        self.assertTrue(is_logged_in)
+
+        response = self.client.get(self.COURSE_URL)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_create_course_endpoint_with_admin_login_post(self):
+        is_logged_in = self.client.login(email=self.admin_user["email"], password=self.admin_user["password"])
+        self.assertTrue(is_logged_in)
+
+        response = self.client.post(self.COURSE_URL,
+                                    data={"code": "test",
+                                          "title": "test_title",
+                                          "description": "test_description"})
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_create_course_endpoint_with_student_user_login_post(self):
+        is_logged_in = self.client.login(email=self.student_user["email"], password=self.student_user["password"])
+        self.assertTrue(is_logged_in)
+
+        response = self.client.post(self.COURSE_URL,
+                                    data={"code": "test",
+                                          "title": "test_title",
+                                          "description": "test_description"})
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_create_course_endpoint_with_admin_login_patch(self):
+        is_logged_in = self.client.login(email=self.admin_user["email"], password=self.admin_user["password"])
+        self.assertTrue(is_logged_in)
+
+        response_created = self.client.post(self.COURSE_URL,
+                                            data={"code": "test",
+                                                  "title": "test_title",
+                                                  "description": "test_description",
+                                                  "is_active": True})
+        self.assertEqual(response_created.status_code, status.HTTP_201_CREATED)
+
+        response_patched = self.client.patch("{}{}{}".format(self.COURSE_URL, response_created.data["id"], "/"),
+                                             data={"code": "test_patched",
+                                                   "title": "test_title_patched",
+                                                   "description": "test_description_patched"})
+        self.assertEqual(response_patched.status_code, status.HTTP_200_OK)
+
+    def test_create_course_endpoint_with_student_user_login_patch(self):
+        is_logged_in_admin = self.client.login(email=self.admin_user["email"], password=self.admin_user["password"])
+        self.assertTrue(is_logged_in_admin)
+
+        response_created = self.client.post(self.COURSE_URL,
+                                            data={"code": "test",
+                                                  "title": "test_title",
+                                                  "description": "test_description",
+                                                  "is_active": True})
+        self.assertEqual(response_created.status_code, status.HTTP_201_CREATED)
+
+        self.client.logout()
+
+        is_logged_in_user = self.client.login(email=self.student_user["email"], password=self.student_user["password"])
+        self.assertTrue(is_logged_in_user)
+
+        response_patched = self.client.patch("{}{}{}".format(self.COURSE_URL, response_created.data["id"], "/"),
+                                             data={"code": "test_patched",
+                                                   "title": "test_title_patched",
+                                                   "description": "test_description_patched"})
+        self.assertEqual(response_patched.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_create_course_endpoint_with_admin_login_del(self):
+        is_logged_in = self.client.login(email=self.admin_user["email"], password=self.admin_user["password"])
+        self.assertTrue(is_logged_in)
+
+        response_created = self.client.post(self.COURSE_URL,
+                                            data={"code": "test",
+                                                  "title": "test_title",
+                                                  "description": "test_description",
+                                                  "is_active": True})
+        self.assertEqual(response_created.status_code, status.HTTP_201_CREATED)
+
+        response_deleted = self.client.delete("{}{}{}".format(self.COURSE_URL, response_created.data["id"], "/"), )
+        self.assertEqual(response_deleted.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_create_course_endpoint_with_student_user_login_del(self):
+        is_logged_in_admin = self.client.login(email=self.admin_user["email"], password=self.admin_user["password"])
+        self.assertTrue(is_logged_in_admin)
+
+        response_created = self.client.post(self.COURSE_URL,
+                                            data={"code": "test",
+                                                  "title": "test_title",
+                                                  "description": "test_description",
+                                                  "is_active": True})
+        self.assertEqual(response_created.status_code, status.HTTP_201_CREATED)
+
+        self.client.logout()
+
+        is_logged_in_user = self.client.login(email=self.student_user["email"], password=self.student_user["password"])
+        self.assertTrue(is_logged_in_user)
+
+        response_deleted = self.client.delete("{}{}{}".format(self.COURSE_URL, response_created.data["id"], "/"), )
+        self.assertEqual(response_deleted.status_code, status.HTTP_403_FORBIDDEN)
+
     def test_create_course_endpoint_without_login(self):
         self.client.logout()
         response = self.client.get(self.COURSE_URL)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_is_course_unique(self):
+    def test_is_course_unique_via_post(self):
         is_logged_in = self.client.login(email=self.admin_user["email"], password=self.admin_user["password"])
         self.assertTrue(is_logged_in)
 
