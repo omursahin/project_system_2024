@@ -21,6 +21,8 @@ class GroupCreateList(generics.ListCreateAPIView):
     ordering_fields = '__all__'
 
 
+
+
 class GroupDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = GroupSerializer
     queryset = Group.active.all()
