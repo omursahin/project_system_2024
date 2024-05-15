@@ -105,7 +105,7 @@ class SemesterCourseTest(APITestCase):
     # Delete
     def test_semester_course_delete_admin(self):
         response = self.add_record(isLogout=False)
-        url = self.SEMESTER_COURSE_URL + f"{response.data['id']}/"
+        url = f"{self.SEMESTER_COURSE_URL}{response.data['id']}/"
         response1 = self.client.delete(url)
         self.assertEqual(response1.status_code, status.HTTP_204_NO_CONTENT)
 
@@ -114,13 +114,13 @@ class SemesterCourseTest(APITestCase):
         access = self.client.login(email=self.student_user["email"],
                                    password=self.student_user["password"])
         self.assertEqual(access, True)
-        url = self.SEMESTER_COURSE_URL + f"{response.data['id']}/"
+        url = f"{self.SEMESTER_COURSE_URL}{response.data['id']}/"
         response1 = self.client.delete(url)
         self.assertEqual(response1.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_semester_course_delete_unauthorized(self):
         response = self.add_record(isLogout=True)
-        url = self.SEMESTER_COURSE_URL + f"{response.data['id']}/"
+        url = f"{self.SEMESTER_COURSE_URL}{response.data['id']}/"
         response1 = self.client.delete(url)
         self.assertEqual(response1.status_code, status.HTTP_401_UNAUTHORIZED)
 
@@ -130,7 +130,7 @@ class SemesterCourseTest(APITestCase):
         update_data = {
             "max_grup_size": 50
         }
-        url = self.SEMESTER_COURSE_URL + f"{response.data['id']}/"
+        url = f"{self.SEMESTER_COURSE_URL}{response.data['id']}/"
         response1 = self.client.patch(url, update_data, format="json")
         self.assertEqual(response1.status_code, status.HTTP_200_OK)
 
@@ -141,7 +141,7 @@ class SemesterCourseTest(APITestCase):
         update_data = {
             "max_grup_size": 50
         }
-        url = self.SEMESTER_COURSE_URL + f"{response.data['id']}/"
+        url = f"{self.SEMESTER_COURSE_URL}{response.data['id']}/"
         response1 = self.client.patch(url, update_data, format="json")
         self.assertEqual(response1.status_code, status.HTTP_403_FORBIDDEN)
 
@@ -150,7 +150,7 @@ class SemesterCourseTest(APITestCase):
         update_data = {
             "max_grup_size": 50
         }
-        url = self.SEMESTER_COURSE_URL + f"{response.data['id']}/"
+        url = f"{self.SEMESTER_COURSE_URL}{response.data['id']}/"
         response1 = self.client.patch(url, update_data, format="json")
         self.assertEqual(response1.status_code, status.HTTP_401_UNAUTHORIZED)
 
@@ -165,7 +165,7 @@ class SemesterCourseTest(APITestCase):
             "course": self.course.id,
             "max_grup_size": 50
         }
-        url = self.SEMESTER_COURSE_URL + f"{response.data['id']}/"
+        url = f"{self.SEMESTER_COURSE_URL}{response.data['id']}/"
         response1 = self.client.put(url, update_data, format="json")
 
         self.assertEqual(response1.status_code, status.HTTP_403_FORBIDDEN)
@@ -177,7 +177,7 @@ class SemesterCourseTest(APITestCase):
             "course": self.course.id,
             "max_grup_size": 50
         }
-        url = self.SEMESTER_COURSE_URL + f"{response.data['id']}/"
+        url = f"{self.SEMESTER_COURSE_URL}{response.data['id']}/"
         response1 = self.client.put(url, update_data, format="json")
         self.assertEqual(response1.status_code, status.HTTP_200_OK)
 
@@ -188,6 +188,6 @@ class SemesterCourseTest(APITestCase):
             "course": self.course.id,
             "max_grup_size": 50
         }
-        url = self.SEMESTER_COURSE_URL + f"{response.data['id']}/"
+        url = f"{self.SEMESTER_COURSE_URL}{response.data['id']}/"
         response1 = self.client.put(url, update_data, format="json")
         self.assertEqual(response1.status_code, status.HTTP_401_UNAUTHORIZED)
