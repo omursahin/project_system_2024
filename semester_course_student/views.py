@@ -6,6 +6,8 @@ from project_system_2024.core.renderer import JSONResponseRenderer
 from semester_course_student.models import SemesterCourseStudent
 from semester_course_student.serializers import SemesterCourseStudentSerializer
 
+from semester_course_student.permission import IsAdminAllPermissionAndStudentSafeMethod
+
 
 # Create your views here.
 class SemesterCourseStudentCreateList(generics.ListCreateAPIView):
@@ -21,6 +23,6 @@ class SemesterCourseStudentCreateList(generics.ListCreateAPIView):
     ordering_fields = '__all__'
 
 class SemesterCourseStudentDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [IsAdminAllPermissionAndStudentSafeMethod]
     serializer_class = SemesterCourseStudentSerializer
     queryset = SemesterCourseStudent.active.all()

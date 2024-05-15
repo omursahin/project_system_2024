@@ -98,11 +98,45 @@ class SemesterCourseStudentTest(APITestCase):
         response = self.client.get(self.URL)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_semester_course_student_list_admin(self):
+    def test_semester_course_student_list_student(self):
         access = self.client.login(email=self.student_user["email"], password=self.student_user["password"])
         self.assertTrue(access)
         response = self.client.get(self.URL)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    def test_semester_course_student_detail_admin(self):
+        semester_course_student_payload = {
+            "is_active": True,
+            "mid_term": 2025,
+            "final": 50,
+            "make_up": 70,
+            "semester_course": self.semester_course.id,
+            "student": self.student.id
+        }
+        access = self.client.login(email=self.admin_user["email"], password=self.admin_user["password"])
+        self.assertTrue(access)
+        response = self.client.post(self.URL, semester_course_student_payload)
+        url = "{}{}/".format(self.URL, response.data['id'])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_semester_course_student_detail_student(self):
+        semester_course_student_payload = {
+            "is_active": True,
+            "mid_term": 2025,
+            "final": 50,
+            "make_up": 70,
+            "semester_course": self.semester_course.id,
+            "student": self.student.id
+        }
+        access = self.client.login(email=self.admin_user["email"], password=self.admin_user["password"])
+        self.assertTrue(access)
+        response = self.client.post(self.URL, semester_course_student_payload)
+        self.client.logout()
+        access = self.client.login(email=self.student_user["email"], password=self.student_user["password"])
+        self.assertTrue(access)
+        url = "{}{}/".format(self.URL, response.data['id'])
+        response_detail = self.client.get(url)
+        self.assertEqual(response_detail.status_code, status.HTTP_200_OK)
 
     def test_semester_course_student_delete_admin(self):
         semester_course_student_payload = {
@@ -120,7 +154,8 @@ class SemesterCourseStudentTest(APITestCase):
         response_for_delete = self.client.delete(url)
         self.assertEqual(response_for_delete.status_code, status.HTTP_204_NO_CONTENT)
 
-    def test_semester_course_student_delete_student(self):  # hata barındırıyor
+
+    def test_semester_course_student_delete_student(self):
         semester_course_student_payload = {
             "is_active": True,
             "mid_term": 2025,
@@ -157,8 +192,10 @@ class SemesterCourseStudentTest(APITestCase):
         url = "{}{}/".format(self.URL, response.data['id'])
         response_for_patch = self.client.patch(url, update_data)
         self.assertEqual(response_for_patch.status_code, status.HTTP_200_OK)
+        response_for_check = self.client.get(url)
+        self.assertEqual(response_for_check.data["final"],int(60))
 
-    def test_semester_course_student_patch_student(self):  # hata barındırıyor
+    def test_semester_course_student_patch_student(self):
         semester_course_student_payload = {
             "is_active": True,
             "mid_term": 2025,
@@ -203,6 +240,36 @@ class SemesterCourseStudentTest(APITestCase):
         url = "{}{}/".format(self.URL, response.data['id'])
         response_for_patch = self.client.put(url, update_data)
         self.assertEqual(response_for_patch.status_code, status.HTTP_200_OK)
+        response_for_check = self.client.get(url)
+        self.assertTrue(response_for_check.data["is_active"])
+        self.assertEqual(response_for_check.data["mid_term"],2025)
+        self.assertEqual(response_for_check.data["final"],55)
+        self.assertEqual(response_for_check.data["make_up"],77)
+        self.assertEqual(response_for_check.data["semester_course"], self.semester_course.id)
+        self.assertEqual(response_for_check.data["student"], self.student.id)
 
     def test_semester_course_student_put_student(self):
-        pass  # student için delete ve patch hata barındırdığından pas geçilmiştir
+        semester_course_student_payload = {
+            "is_active": True,
+            "mid_term": 2025,
+            "final": 50,
+            "make_up": 70,
+            "semester_course": self.semester_course.id,
+            "student": self.student.id
+        }
+        access = self.client.login(email=self.admin_user["email"], password=self.admin_user["password"])
+        self.assertTrue(access)
+        response_admin = self.client.post(self.URL, semester_course_student_payload)
+        update_data = {
+            "is_active": True,
+            "mid_term": 2025,
+            "final": 55,
+            "make_up": 77,
+            "semester_course": self.semester_course.id,
+            "student": self.student.id
+        }
+        url = "{}{}/".format(self.URL, response_admin.data['id'])
+        self.client.logout()
+        self.client.login(email=self.student_user["email"], password=self.student_user["password"])
+        response_for_patch = self.client.put(url, update_data)
+        self.assertEqual(response_for_patch.status_code, status.HTTP_403_FORBIDDEN)
