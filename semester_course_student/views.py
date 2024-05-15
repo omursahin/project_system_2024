@@ -11,7 +11,6 @@ from semester_course_student.serializers import SemesterCourseStudentSerializer
 class SemesterCourseStudentCreateList(generics.ListCreateAPIView):
     serializer_class = SemesterCourseStudentSerializer
     queryset = SemesterCourseStudent.active.all()
-    permission_classes = [permissions.IsAdminUser]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter,
                        MyOrderingFilter]
     filterset_fields = ('semester_course__semester__term',
@@ -21,8 +20,7 @@ class SemesterCourseStudentCreateList(generics.ListCreateAPIView):
     renderer_classes = [JSONResponseRenderer]
     ordering_fields = '__all__'
 
-
 class SemesterCourseStudentDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.IsAdminUser]
     serializer_class = SemesterCourseStudentSerializer
     queryset = SemesterCourseStudent.active.all()
-    permission_classes = [permissions.IsAuthenticated]
