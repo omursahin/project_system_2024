@@ -54,6 +54,20 @@ class SemesterCourseTest(APITestCase):
             access = self.client.logout()
         return response
 
+    def test_add_records_not_logout(self):
+        response = self.add_record(isLogout=False)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_add_records_logout(self):
+        response = self.add_record(isLogout=True)
+        semester_course_detail = {
+            "semester": self.semester.id,
+            "course": self.course.id,
+            "max_grup_size": 100,
+        }
+        response = self.client.post(self.SEMESTER_COURSE_URL, semester_course_detail, format="json")
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
     # Create
     def test_semester_course_create_admin(self):
         response = self.add_record(isLogout=False)
@@ -130,7 +144,7 @@ class SemesterCourseTest(APITestCase):
         update_data = {
             "max_grup_size": 50
         }
-        url = self.SEMESTER_COURSE_URL + f"{response.data['id']}/"
+        url = f"{self.SEMESTER_COURSE_URL}{response.data['id']}/"
         response1 = self.client.patch(url, update_data, format="json")
         self.assertEqual(response1.status_code, status.HTTP_200_OK)
 
