@@ -41,15 +41,13 @@ class GroupTest(APITestCase):
         group1 = Group.objects.create(
             owner=self.student,
             semester_course=self.semester_course,
-            title=self.group_temp["title"],
-            description=self.group_temp["description"])
+            title=group_temp["title"],
+            description=group_temp["description"])
 
         group2 = Group.objects.create(owner=self.student,
                                       semester_course=self.semester_course2,
-                                      title=self.group_temp["title"],
-                                      description=self.group_temp["description"],
-                                      max_size=self.group_temp["max_size"],
-                                      invitation_code=self.group_temp["invitation_code"])
+                                      title=group_temp["title"],
+                                      description=group_temp["description"])
 
         groups = Group.objects.filter(owner=self.student, semester_course=self.semester_course)
         self.assertLess(groups.count(), 2)
@@ -58,7 +56,6 @@ class GroupTest(APITestCase):
         group_temp = {
             "title": "Test Group",
             "description": "test description",
-            "max_size": 10,
             "semester_course": self.semester_course.id
         }
         is_loggedin = self.client.login(email=self.student.email, password=self.PASSWORD)
