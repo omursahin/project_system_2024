@@ -1,6 +1,7 @@
 # Create your tests here.
 
-# from django.db import IntegrityError
+import django.db.utils
+
 from rest_framework import status
 from rest_framework.test import APITestCase
 
@@ -49,16 +50,14 @@ class CourseTest(APITestCase):
         self.assertEqual(test_course.title, "test_title")
         self.assertEqual(test_course.description, "test_description")
 
-    """
     def test_create_course_is_unique(self):
         test_course_1 = Course.objects.create(code="test", title="test_title", description="test_description")
         self.assertEqual(test_course_1.code, "test")
         self.assertEqual(test_course_1.title, "test_title")
         self.assertEqual(test_course_1.description, "test_description")
-        self.assertRaises(Course.objects.create(code="test",
-                                                title="test_title",
-                                                description="test_description"), IntegrityError)
-    """
+        with self.assertRaises(django.db.utils.IntegrityError) as error:
+            Course.objects.create(code="test", title="test_title", description="test_description")
+            self.assertEqual(str(error), "UNIQUE constraint failed: course.code")
 
     def test_create_course_endpoint_with_admin_login_get(self):
         is_logged_in = self.client.login(email=self.admin_user["email"], password=self.admin_user["password"])
