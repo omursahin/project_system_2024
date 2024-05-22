@@ -9,7 +9,7 @@ class Report(BaseModel):
                                         on_delete=models.CASCADE,
                                         related_name="reports")
     title = models.CharField(max_length=255, blank=False, null=False)
-    description = models.CharField(max_length=255, blank=True, null=True)
+    description = models.CharField(max_length=255, blank=True, default='')
     is_public = models.BooleanField(default=False, blank=False, null=False)
     is_final = models.BooleanField(default=False, blank=False, null=False)
 

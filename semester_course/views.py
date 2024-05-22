@@ -5,7 +5,7 @@ from project_system_2024.core.filter import MyOrderingFilter
 
 from project_system_2024.core.renderer import JSONResponseRenderer
 from semester_course.models import SemesterCourse
-from semester_course.permission import  IsAdminOrReadOnly
+from semester_course.permission import IsAdminOrReadOnly
 from semester_course.serializers import SemesterCourseSerializer
 
 

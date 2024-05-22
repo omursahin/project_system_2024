@@ -11,7 +11,7 @@ class Group(BaseModel):
         'semester_course.SemesterCourse',
         on_delete=models.CASCADE, related_name='group')
     title = models.CharField(max_length=255)
-    description = models.CharField(max_length=255, null=True, blank=True)
+    description = models.CharField(max_length=255, default='', blank=True)
     max_size = models.IntegerField()
     status = models.CharField(
         max_length=1, choices=(

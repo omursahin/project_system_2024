@@ -3,7 +3,6 @@ from semester_course_student.models import SemesterCourseStudent
 from semester_course.models import SemesterCourse
 from semester.models import Semester
 from course.models import Course
-from account.models import MyUser
 from rest_framework import status
 from account.models import MyUser
 
@@ -103,6 +102,7 @@ class SemesterCourseStudentTest(APITestCase):
         self.assertTrue(access)
         response = self.client.get(self.URL)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
     def test_semester_course_student_detail_admin(self):
         semester_course_student_payload = {
             "is_active": True,
@@ -194,7 +194,7 @@ class SemesterCourseStudentTest(APITestCase):
         response_for_patch = self.client.patch(url, update_data)
         self.assertEqual(response_for_patch.status_code, status.HTTP_200_OK)
         response_for_check = self.client.get(url)
-        self.assertEqual(response_for_check.data["final"],int(60))
+        self.assertEqual(response_for_check.data["final"], int(60))
 
     def test_semester_course_student_patch_student(self):
         semester_course_student_payload = {
@@ -243,9 +243,9 @@ class SemesterCourseStudentTest(APITestCase):
         self.assertEqual(response_for_patch.status_code, status.HTTP_200_OK)
         response_for_check = self.client.get(url)
         self.assertTrue(response_for_check.data["is_active"])
-        self.assertEqual(response_for_check.data["mid_term"],2025)
-        self.assertEqual(response_for_check.data["final"],55)
-        self.assertEqual(response_for_check.data["make_up"],77)
+        self.assertEqual(response_for_check.data["mid_term"], 2025)
+        self.assertEqual(response_for_check.data["final"], 55)
+        self.assertEqual(response_for_check.data["make_up"], 77)
         self.assertEqual(response_for_check.data["semester_course"], self.semester_course.id)
         self.assertEqual(response_for_check.data["student"], self.student.id)
 

@@ -8,7 +8,7 @@ class Course(BaseModel):
     code = models.CharField(unique=True, max_length=20,
                             blank=False, null=False)
     title = models.CharField(max_length=32, blank=False, null=False)
-    description = models.CharField(max_length=255, blank=True, null=True)
+    description = models.CharField(max_length=255, blank=True, default='')
 
     def __str__(self):
         return f"{self.code}-{self.title}"

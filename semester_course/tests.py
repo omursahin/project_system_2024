@@ -150,8 +150,6 @@ class SemesterCourseTest(APITestCase):
 
     def test_semester_course_not_update_patch_student(self):
         response = self.add_record(isLogout=True)
-        access = self.client.login(email=self.student_user["email"],
-                                   password=self.student_user["password"])
         update_data = {
             "max_grup_size": 50
         }

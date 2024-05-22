@@ -11,7 +11,7 @@ class GroupProject(BaseModel):
                         related_name="group_project"))
 
     title = models.CharField(max_length=255, blank=False, null=False)
-    description = models.CharField(max_length=255, blank=True, null=True)
+    description = models.CharField(max_length=255, blank=True, default='')
     is_approved = models.BooleanField()
     STATUS_CHOICES = (("A", "Approved"),
                       ("P", "Pending"),

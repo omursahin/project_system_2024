@@ -9,7 +9,7 @@ class ProjectReport(BaseModel):
                                 on_delete=models.CASCADE)
     report = models.ForeignKey('report.Report', on_delete=models.CASCADE)
     file = models.FileField(upload_to='data', null=True, blank=True)
-    description = models.CharField(max_length=255, null=True, blank=True)
+    description = models.CharField(max_length=255, default='', blank=True)
     is_submitted = models.BooleanField(default=False)
     version = models.IntegerField(null=True, blank=True)
     plagiarism_file = models.FileField(upload_to='data', null=True, blank=True)

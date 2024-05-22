@@ -1,5 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics, filters, permissions
+from rest_framework import generics, filters
 
 from project_system_2024.core.filter import MyOrderingFilter
 from project_system_2024.core.renderer import JSONResponseRenderer
@@ -21,6 +21,7 @@ class SemesterCourseStudentCreateList(generics.ListCreateAPIView):
                      'student__first_name', 'student__email')
     renderer_classes = [JSONResponseRenderer]
     ordering_fields = '__all__'
+
 
 class SemesterCourseStudentDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAdminAllPermissionAndStudentSafeMethod]
