@@ -4,6 +4,7 @@ from rest_framework import generics, filters, permissions
 from project_system_2024.core.filter import MyOrderingFilter
 from project_system_2024.core.renderer import JSONResponseRenderer
 from report.models import Report
+from report.permission import IsAuthenticatedForCreate
 from report.serializers import ReportSerializer
 
 
@@ -11,7 +12,7 @@ from report.serializers import ReportSerializer
 class ReportCreateList(generics.ListCreateAPIView):
     serializer_class = ReportSerializer
     queryset = Report.active.all()
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAdminUser | IsAuthenticatedForCreate]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter,
                        MyOrderingFilter]
     filterset_fields = ('semester_course__semester__term',

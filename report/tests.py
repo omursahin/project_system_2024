@@ -7,7 +7,7 @@ from semester.models import Semester
 from semester_course.models import SemesterCourse
 
 
-class SemesterCourseTest(APITestCase):
+class ReportTest(APITestCase):
     REPORT_URL = "/api/v1/reports/"
 
     admin_user = {
@@ -81,7 +81,7 @@ class SemesterCourseTest(APITestCase):
         response = self.create_reports(isLogout=False)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_reports_not_create_student(self):
+    def test_reports_create_student(self):
         report_detail = {
             "semester_course": self.semester_course.id,
             "title": "Title1",
@@ -96,7 +96,7 @@ class SemesterCourseTest(APITestCase):
         response = self.client.post(self.REPORT_URL,
                                     report_detail)
         self.assertEqual(response.status_code,
-                         status.HTTP_403_FORBIDDEN)
+                         status.HTTP_201_CREATED)
 
     def test_semester_course_create_unauthorized(self):
         report_detail = {
