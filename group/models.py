@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 
 from project_system_2024.core.base_model import BaseModel

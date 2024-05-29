@@ -22,7 +22,6 @@ class GroupCreateList(generics.ListCreateAPIView):
 
 
 
-
 class GroupDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = GroupSerializer
     queryset = Group.active.all()
