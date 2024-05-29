@@ -25,4 +25,4 @@ class ReportCreateList(generics.ListCreateAPIView):
 class ReportDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ReportSerializer
     queryset = Report.active.all()
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAdminUser]
